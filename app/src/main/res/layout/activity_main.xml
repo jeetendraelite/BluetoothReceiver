@@ -6,12 +6,43 @@
     android:layout_height="match_parent"
     tools:context="com.example.jeetendraachtani.bluetoothreciever.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_height="wrap_content">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_bluetooth"
-        android:text="Click Event through Bluetooth Device"
+        android:id="@+id/tv_bluetooth1"
+        android:layout_weight="1"
+        android:text="Click 1"
         android:textSize="15sp"
-        android:layout_centerInParent="true" />
+         />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_bluetooth2"
+            android:layout_weight="1"
+            android:text="Click 2"
+            android:textSize="15sp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_bluetooth3"
+            android:text="Click 3"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            />
+    </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_bluetooth4"
+        android:layout_weight="1"
+        android:text="Click 4"
+        android:layout_centerInParent="true"
+        android:textSize="15sp"/>
 </RelativeLayout>
