@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         filter3.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         registerReceiver(mBroadcastReceiver3, filter3);
 
+
         tv_bluetooth4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
