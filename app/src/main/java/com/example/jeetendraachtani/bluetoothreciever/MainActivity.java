@@ -87,18 +87,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-
+        /*
         switch (keyCode) {
             case KeyEvent.KEYCODE_ENTER:
                 Log.d(this.getClass().getName(), "KEYCODE_ENTER");
                 //   Toast.makeText(this, "KeyCOde ENter Pressed", Toast.LENGTH_SHORT).show();
-                buttonClick();
+               // tv_bluetooth4.setFocusable(true);
+
+               buttonClick();
 
             default:
                 return super.onKeyUp(keyCode, event);
 
+
+*/
+            if(keyCode==KeyEvent.KEYCODE_ENTER) {
+                tv_bluetooth4.setFocusable(true);
+                buttonClick();
+            }
+            else {
+                tv_bluetooth4.setFocusable(false);
+            }
+
+        return super.onKeyUp(keyCode, event);
         }
-    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
