@@ -50,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         filter3.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         registerReceiver(mBroadcastReceiver3, filter3);
 
-
+        tv_bluetooth1.setFocusable(false);
+        tv_bluetooth2.setFocusable(false);
+        tv_bluetooth3.setFocusable(false);
+        tv_bluetooth4.setFocusable(false);
 
         tv_bluetooth4.setOnClickListener(new View.OnClickListener() {
             @Override
