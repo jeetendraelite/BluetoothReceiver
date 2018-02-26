@@ -1,5 +1,6 @@
 package com.example.jeetendraachtani.bluetoothreciever;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,6 +29,9 @@ public class Main3Activity extends AppCompatActivity {
 
     @BindView(R.id.tv_bluetooth1)
     Button tv_bluetooth1;
+
+
+     Boolean isbtnLongPressed=false;
 
     AudioManager manager;
 
@@ -44,7 +50,46 @@ public class Main3Activity extends AppCompatActivity {
 
         tv_bluetooth1.setFocusable(false);
 
+
+       tv_bluetooth1.setOnLongClickListener(tv1HoldListener);
+
+        tv_bluetooth1.setOnTouchListener(tv1TouchListener);
     }
+
+
+         View.OnLongClickListener tv1HoldListener = new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View pView) {
+                Toast.makeText(Main3Activity.this, "Long Press Starts!!!!", Toast.LENGTH_SHORT).show();
+
+                tv_bluetooth1.setFocusable(true);
+                isbtnLongPressed = true;
+                return true;
+            }
+        };
+
+
+        View.OnTouchListener tv1TouchListener = new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View pView, MotionEvent pEvent) {
+                pView.onTouchEvent(pEvent);
+                // We're only interested in when the button is released.
+                if (pEvent.getAction() == MotionEvent.ACTION_UP) {
+                    // We're only interested in anything if our speak button is currently pressed.
+                    if (isbtnLongPressed) {
+                        // Do something when the button is released.
+
+                        Toast.makeText(Main3Activity.this, "Long Press Released ", Toast.LENGTH_SHORT).show();
+                        tv_bluetooth1.setFocusable(false);
+                        isbtnLongPressed = false;
+                    }
+                }
+                return true;
+            }
+        };
+
     private final BroadcastReceiver mBroadcastReceiver3 = new BroadcastReceiver() {
 
         @Override
@@ -66,19 +111,32 @@ public class Main3Activity extends AppCompatActivity {
         }
     };
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if(keyCode== KeyEvent.KEYCODE_ENTER) {
-            Log.d(this.getClass().getName(), "KEYCODE_ENTER");
-            tv_bluetooth1.setFocusable(true);
-            buttonClick();
-        }
-        else {
-            tv_bluetooth1.setFocusable(false);
+
+
+        @Override
+        public boolean onKeyUp ( int keyCode, KeyEvent event){
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                Log.d(this.getClass().getName(), "KEYCODE_ENTER");
+
+
+
+
+               // tv_bluetooth1.setOnLongClickListener(tv1HoldListener);
+                //tv_bluetooth1.setOnTouchListener(tv1TouchListener);
+
+                tv_bluetooth1.performClick();
+
+
+            } else {
+                tv_bluetooth1.setFocusable(false);
+            }
+
+            return super.onKeyUp(keyCode, event);
         }
 
-        return super.onKeyUp(keyCode, event);
-    }
+
+
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
