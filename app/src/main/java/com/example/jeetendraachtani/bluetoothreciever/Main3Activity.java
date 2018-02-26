@@ -121,6 +121,7 @@ public class Main3Activity extends AppCompatActivity {
 
 
 
+
                // tv_bluetooth1.setOnLongClickListener(tv1HoldListener);
                 //tv_bluetooth1.setOnTouchListener(tv1TouchListener);
 
