@@ -107,33 +107,57 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     if (i == 1) {
                         Toast.makeText(MainActivity.this, "Single Click", Toast.LENGTH_SHORT).show();
-                        tv_bluetooth1.setClickable(true);
+
+                        if(tv_bluetooth1.isClickable()){
+                            tv_bluetooth1.setClickable(false);
+                            tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
+                        }
+                        else {
+                            tv_bluetooth1.setClickable(true);
+                            tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        }
+
                         tv_bluetooth2.setClickable(false);
                         tv_bluetooth3.setClickable(false);
 
-                        tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.greyDark));
                         tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
                         tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
                         buttonClick();
                     } else if (i == 2) {
                         Toast.makeText(MainActivity.this, "Double Click", Toast.LENGTH_SHORT).show();
+
+                        if(tv_bluetooth2.isClickable()){
+                            tv_bluetooth2.setClickable(false);
+                            tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
+                        }
+                        else {
+                            tv_bluetooth2.setClickable(true);
+                            tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        }
+
                         tv_bluetooth1.setClickable(false);
-                        tv_bluetooth2.setClickable(true);
                         tv_bluetooth3.setClickable(false);
 
                         tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
-                        tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.greyDark));
                         tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
                         buttonClick();
                     } else if (i == 3) {
                         Toast.makeText(MainActivity.this, "Triple Click", Toast.LENGTH_SHORT).show();
+
+                        if(tv_bluetooth3.isClickable()){
+                            tv_bluetooth3.setClickable(false);
+                            tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
+                        }
+                        else {
+                            tv_bluetooth3.setClickable(false);
+                            tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        }
+
                         tv_bluetooth1.setClickable(false);
                         tv_bluetooth2.setClickable(false);
-                        tv_bluetooth3.setClickable(true);
 
                         tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
                         tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
-                        tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.greyDark));
                         buttonClick();
                     }
                  /*   tv_bluetooth1.setFocusable(false);
