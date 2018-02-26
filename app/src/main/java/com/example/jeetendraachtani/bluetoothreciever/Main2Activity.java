@@ -113,7 +113,7 @@ public class Main2Activity extends AppCompatActivity {
                         tv_bluetooth2.setFocusable(true);
                         tv_bluetooth1.setFocusable(false);
                         tv_bluetooth3.setFocusable(false);
-                        // buttonClick();
+                        buttonClick();
                     } else {
                         tv_bluetooth2.setFocusable(false);
                     }
