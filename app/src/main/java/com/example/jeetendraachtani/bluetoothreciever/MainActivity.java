@@ -5,6 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +35,21 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_bluetooth4)
     Button tv_bluetooth4;
 
+    AudioManager manager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         takeKeyEvents(true);
+
         IntentFilter filter3 = new IntentFilter();
         filter3.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         filter3.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         registerReceiver(mBroadcastReceiver3, filter3);
+
 
 
         tv_bluetooth4.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
 
+
+
             }
         }
     };
@@ -77,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_ENTER:
                 Log.d(this.getClass().getName(), "KEYCODE_ENTER");
-             //   Toast.makeText(this, "KeyCOde ENter Pressed", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(this, "KeyCOde ENter Pressed", Toast.LENGTH_SHORT).show();
                 buttonClick();
-                return true;
 
             default:
                 return super.onKeyUp(keyCode, event);
@@ -87,8 +97,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void buttonClick()
-    {
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                Log.d(this.getClass().getName(), "KEYCODE_VOLUME_UP");
+                manager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                manager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_RAISE,
+                        AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Log.d(this.getClass().getName(), "KEYCODE_VOLUME_DOWN");
+                manager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                manager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_LOWER,
+                        AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                return true;
+
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    public void buttonClick() {
         Toast.makeText(getApplicationContext(), "Bluetooth Event Clicked", Toast.LENGTH_SHORT).show();
 
     }
