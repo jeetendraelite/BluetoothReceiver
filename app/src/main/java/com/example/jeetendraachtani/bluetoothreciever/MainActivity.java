@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,11 +33,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_bluetooth3)
     Button tv_bluetooth3;
 
-    @BindView(R.id.tv_bluetooth4)
-    Button tv_bluetooth4;
-
     AudioManager manager;
 
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +49,22 @@ public class MainActivity extends AppCompatActivity {
         filter3.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         registerReceiver(mBroadcastReceiver3, filter3);
 
-        tv_bluetooth1.setFocusable(false);
-        tv_bluetooth2.setFocusable(false);
-        tv_bluetooth3.setFocusable(false);
-        tv_bluetooth4.setFocusable(false);
+        tv_bluetooth1.setClickable(false);
+        tv_bluetooth2.setClickable(false);
+        tv_bluetooth3.setClickable(false);
 
-        tv_bluetooth4.setOnClickListener(new View.OnClickListener() {
+        tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
+        tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
+        tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
+
+
+       /* tv_bluetooth3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buttonClick();
             }
         });
-
+*/
 
     }
 
@@ -80,25 +83,68 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
 
-
-
             }
         }
     };
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-            if(keyCode==KeyEvent.KEYCODE_ENTER) {
+           /* if(keyCode==KeyEvent.KEYCODE_ENTER) {
                 Log.d(this.getClass().getName(), "KEYCODE_ENTER");
-                tv_bluetooth4.setFocusable(true);
+                tv_bluetooth3.setFocusable(true);
                 buttonClick();
             }
             else {
-                tv_bluetooth4.setFocusable(false);
-            }
+                tv_bluetooth3.setFocusable(false);
+            }*/
 
-        return super.onKeyUp(keyCode, event);
+
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            i++;
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (i == 1) {
+                        Toast.makeText(MainActivity.this, "Single Click", Toast.LENGTH_SHORT).show();
+                        tv_bluetooth1.setClickable(true);
+                        tv_bluetooth2.setClickable(false);
+                        tv_bluetooth3.setClickable(false);
+
+                        tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
+                        tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
+                        buttonClick();
+                    } else if (i == 2) {
+                        Toast.makeText(MainActivity.this, "Double Click", Toast.LENGTH_SHORT).show();
+                        tv_bluetooth1.setClickable(false);
+                        tv_bluetooth2.setClickable(true);
+                        tv_bluetooth3.setClickable(false);
+
+                        tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
+                        tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.grey));
+                        buttonClick();
+                    } else if (i == 3) {
+                        Toast.makeText(MainActivity.this, "Triple Click", Toast.LENGTH_SHORT).show();
+                        tv_bluetooth1.setClickable(false);
+                        tv_bluetooth2.setClickable(false);
+                        tv_bluetooth3.setClickable(true);
+
+                        tv_bluetooth1.setBackgroundColor(getResources().getColor(R.color.grey));
+                        tv_bluetooth2.setBackgroundColor(getResources().getColor(R.color.grey));
+                        tv_bluetooth3.setBackgroundColor(getResources().getColor(R.color.greyDark));
+                        buttonClick();
+                    }
+                 /*   tv_bluetooth1.setFocusable(false);
+                    tv_bluetooth2.setFocusable(false);
+                    tv_bluetooth3.setFocusable(false);*/
+                    i = 0;
+                }
+            }, 500);
         }
+        return super.onKeyUp(keyCode, event);
+    }
 
 
     @Override
