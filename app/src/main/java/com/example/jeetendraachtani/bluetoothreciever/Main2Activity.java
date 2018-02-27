@@ -62,13 +62,13 @@ public class Main2Activity extends AppCompatActivity {
         tv_bluetooth2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonClick();
+                buttonClick2();
             }
         });
         tv_bluetooth3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonClick();
+                buttonClick3();
             }
         });
 
@@ -106,7 +106,7 @@ public class Main2Activity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (i == 1) {
-                        Toast.makeText(Main2Activity.this, "Single Click", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Main2Activity.this, "Single Click", Toast.LENGTH_SHORT).show();
                         tv_bluetooth1.setFocusable(true);
                         tv_bluetooth2.setFocusable(false);
                         tv_bluetooth3.setFocusable(false);
@@ -128,23 +128,23 @@ public class Main2Activity extends AppCompatActivity {
                     }
 
                     if (i == 2) {
-                        Toast.makeText(Main2Activity.this, "Double Click", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Main2Activity.this, "Double Click", Toast.LENGTH_SHORT).show();
 
 
                         tv_bluetooth2.setFocusable(true);
                         tv_bluetooth1.setFocusable(false);
                         tv_bluetooth3.setFocusable(false);
-                        buttonClick();
+                        buttonClick2();
                     } else {
                         tv_bluetooth2.setFocusable(false);
                     }
 
                     if (i == 3) {
-                        Toast.makeText(Main2Activity.this, "Triple Click", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Main2Activity.this, "Triple Click", Toast.LENGTH_SHORT).show();
                         tv_bluetooth3.setFocusable(true);
                         tv_bluetooth1.setFocusable(false);
                         tv_bluetooth2.setFocusable(false);
-                        buttonClick();
+                        buttonClick3();
                     } else {
                         tv_bluetooth3.setFocusable(false);
                     }
@@ -189,7 +189,13 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void buttonClick() {
-        Toast.makeText(getApplicationContext(), "Bluetooth Event Clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Bluetooth Single Press Clicked", Toast.LENGTH_SHORT).show();
+
+    } public void buttonClick2() {
+        Toast.makeText(getApplicationContext(), "Bluetooth Double Press Clicked", Toast.LENGTH_SHORT).show();
+
+    } public void buttonClick3() {
+        Toast.makeText(getApplicationContext(), "Bluetooth Third Press Clicked", Toast.LENGTH_SHORT).show();
 
     }
 
