@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-// Program for Single view Componenet Click.
+// Program for Single view long press Componenet Click.
 
 public class Main3Activity extends AppCompatActivity {
 
@@ -34,6 +34,9 @@ public class Main3Activity extends AppCompatActivity {
      Boolean isbtnLongPressed=false;
 
     AudioManager manager;
+
+    boolean shortPress = false;
+    boolean longPress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +116,62 @@ public class Main3Activity extends AppCompatActivity {
 
 
 
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER){
+            Log.d(this.getClass().getName(), "KEYCODE_ENTER_onKeyLongPress");
+            Toast.makeText(this, "Long Press", Toast.LENGTH_SHORT).show();
+            //Long Press code goes here
+            shortPress = false;
+            longPress = true;
+            return true;
+        }
+        return super.onKeyLongPress(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            Log.d(this.getClass().getName(), "KEYCODE_ENTER_onKeyDown");
+            event.startTracking();
+            if (longPress == true) {
+                shortPress = false;
+            } else {
+                shortPress = true;
+                longPress = false;
+            }
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
+            event.startTracking();
+            if (shortPress) {
+                Log.d(this.getClass().getName(), "KEYCODE_ENTER_onkeyUP");
+                Toast.makeText(this, "Short Press", Toast.LENGTH_SHORT).show();
+                //Short Press code goes here
+            }
+            shortPress = true;
+            longPress = false;
+            return true;
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
+
+
+
+/*
+
         @Override
         public boolean onKeyUp ( int keyCode, KeyEvent event){
+            Toast.makeText(this, "onKeyUp-BlueTooth Connected"+keyCode, Toast.LENGTH_SHORT).show();
+
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 Log.d(this.getClass().getName(), "KEYCODE_ENTER");
 
@@ -122,8 +179,8 @@ public class Main3Activity extends AppCompatActivity {
 
 
 
-               // tv_bluetooth1.setOnLongClickListener(tv1HoldListener);
-                //tv_bluetooth1.setOnTouchListener(tv1TouchListener);
+                tv_bluetooth1.setOnLongClickListener(tv1HoldListener);
+                tv_bluetooth1.setOnTouchListener(tv1TouchListener);
 
                 tv_bluetooth1.performClick();
 
@@ -136,8 +193,19 @@ public class Main3Activity extends AppCompatActivity {
         }
 
 
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            Log.d(this.getClass().getName(), "KEYCODE_ENTER");
+
+            Toast.makeText(this, "Long Key Press", Toast.LENGTH_SHORT).show();
+
+        }
 
 
+
+            return super.onKeyLongPress(keyCode, event);
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -162,6 +230,7 @@ public class Main3Activity extends AppCompatActivity {
                 return super.onKeyDown(keyCode, event);
         }
     }
+*/
 
     public void buttonClick() {
         Toast.makeText(getApplicationContext(), "Bluetooth Event Clicked", Toast.LENGTH_SHORT).show();

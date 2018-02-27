@@ -33,8 +33,6 @@ public class Main2Activity extends AppCompatActivity {
     @BindView(R.id.tv_bluetooth3)
     Button tv_bluetooth3;
 
-    @BindView(R.id.tv_bluetooth4)
-    Button tv_bluetooth4;
 
     AudioManager manager;
 
@@ -55,10 +53,29 @@ public class Main2Activity extends AppCompatActivity {
         filter3.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         registerReceiver(mBroadcastReceiver3, filter3);
 
+        tv_bluetooth1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonClick();
+            }
+        });
+        tv_bluetooth2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonClick();
+            }
+        });
+        tv_bluetooth3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonClick();
+            }
+        });
+
         tv_bluetooth1.setFocusable(false);
         tv_bluetooth2.setFocusable(false);
         tv_bluetooth3.setFocusable(false);
-        tv_bluetooth4.setFocusable(false);
+
     }
 
     private final BroadcastReceiver mBroadcastReceiver3 = new BroadcastReceiver() {
@@ -93,7 +110,7 @@ public class Main2Activity extends AppCompatActivity {
                         tv_bluetooth1.setFocusable(true);
                         tv_bluetooth2.setFocusable(false);
                         tv_bluetooth3.setFocusable(false);
-
+                        buttonClick();
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -127,7 +144,7 @@ public class Main2Activity extends AppCompatActivity {
                         tv_bluetooth3.setFocusable(true);
                         tv_bluetooth1.setFocusable(false);
                         tv_bluetooth2.setFocusable(false);
-                        // buttonClick();
+                        buttonClick();
                     } else {
                         tv_bluetooth3.setFocusable(false);
                     }
@@ -140,24 +157,12 @@ public class Main2Activity extends AppCompatActivity {
                     i = 0;
                 }
             }, 500);
-            longPress();
 
-    }
+
+        }
         return super.onKeyUp(keyCode, event);
     }
 
-
-    public void longPress(){
-        tv_bluetooth4.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(Main2Activity.this, "LONG PRESS", Toast.LENGTH_SHORT).show();
-
-
-                return true;
-            }
-        });
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
